@@ -1,0 +1,17 @@
+EAF Deck
+LMF Deck
+Ladle Wall
+Refractory
+Caster
+	Mold
+	Tundish Cars
+	Water and Hydraulic room
+	Caster Runout
+	Caster Floor
+Vacuum Tank Degasser Deck
+Mold and Segment
+Shred Separator
+Rolling and Finishing and Heat Treat
+Roll Shop
+Cutting/Burning
+Shipping
