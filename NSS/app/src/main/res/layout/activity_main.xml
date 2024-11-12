@@ -11,27 +11,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Your Title"
-        android:textSize="24sp"
+        android:background="#0C640C"
+        android:padding="16dp"
+        android:text="Nucor Safe Spot Acrros the top"
         android:textColor="#FFFFFF"
-        android:padding="16dp" />
+        android:textSize="24sp" />
 
     <!-- Buttons for each area -->
-    <Button
-        android:id="@+id/areaButton1"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Area 1"
-        android:layout_gravity="center_horizontal"
-        android:onClick="openSubPage" />
+        android:text="A description explaining what NSS is?" />
 
-    <Button
-        android:id="@+id/areaButton2"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Area 2"
-        android:layout_gravity="center_horizontal"
-        android:onClick="openSubPage" />
+        android:text="Maybe a Scrollable textview with clickable items inside for each area people can click on??" />
 
     <!-- Add more buttons as needed -->
 
