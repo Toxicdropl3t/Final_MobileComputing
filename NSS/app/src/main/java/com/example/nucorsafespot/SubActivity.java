@@ -41,6 +41,11 @@ public class SubActivity extends AppCompatActivity {
                 .show();
     }
 
+    /**
+     * @deprecated
+     * @param area
+     * @return
+     */
     private List<Equipment> fetchDataFromDatabase(String area) {
         // This is a placeholder. Implement database fetching logic here.
         return DBHelper.getEquipmentList(area);

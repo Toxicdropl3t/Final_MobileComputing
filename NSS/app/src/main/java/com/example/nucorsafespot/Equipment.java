@@ -2,12 +2,12 @@ package com.example.nucorsafespot;
 
 // Equipment.java
 public class Equipment {
-    private String name;
-    private String description;
+    private String name, description, type;
 
-    public Equipment(String name, String description) {
+    public Equipment(String name, String description,String type) {
         this.name = name;
         this.description = description;
+        this.type = type;
     }
 
     public String getName() {
@@ -17,4 +17,5 @@ public class Equipment {
     public String getDescription() {
         return description;
     }
+    public String getType(){return type;}
 }

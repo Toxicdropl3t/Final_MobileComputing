@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+    <!--Primary Colors -->
     <color name="white">#FFFFFFFF</color>
+    <color name="DarkGreen">#213B34</color>
+    <color name="Mediumgreen">#006325</color>
+    <color name="LightGreen">#A1CEAD</color>
+    <color name="PaleGreen">#D9E8E2</color>
+
+    <!-- Secondary Colors -->
+    <color name="Blue">#7CC5EB</color>
+    <color name="LightBlue">#BFE2F6</color>
+    <color name="LightGray">#F5F4F0</color>
+    <color name="black">#FF000000</color>
+
 </resources>

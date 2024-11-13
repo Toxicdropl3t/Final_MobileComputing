@@ -1,5 +1,6 @@
 package com.example.nucorsafespot;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import java.io.File;
@@ -7,6 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -108,7 +111,68 @@ public class DBHelper extends SQLiteOpenHelper {
         } catch (IOException e){
             throw new RuntimeException("Error initializing database", e);
         }
-        return super.getWritableDatabase();
+        return super.getReadableDatabase();
     }
+
+    public List<Equipment> getEquipmentByLocation(String locationname) throws IOException{
+        List<Equipment> returnList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDB();
+        String query = "SELECT e." + COLUMN_ITEM_NAME + ", e." + COLUMN_ITEM_DESCRIPTION + ", et." + COLUMN_EQUIPMENT_TYPE_NAME +
+                " FROM " + EQUIPMENT_TABLE + " e " +
+                "JOIN " + EQLOCATION_TABLE + " el ON e." + COLUMN_ITEM_ID + " = el." + COLUMN_EQLOCATION_ID +
+                " JOIN " + LOCATION_TABLE + " l ON el." + COLUMN_EQLOCATION_LOCATION_ID + " = l." + COLUMN_LOCATION_ID +
+                " JOIN " + TYPE_TABLE + " et ON e." + COLUMN_ITEM_TYPE + " = et." + COLUMN_EQUIPMENT_TYPE_ID +
+                " WHERE l." + COLUMN_LOCATION_NAME + " = " + locationname;
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()){
+            //if there are results then we loop through to create a Equipment Object for each row
+            do {
+                String itemName = cursor.getString(0);
+                String itemDescription = cursor.getString(1);
+                String typeName = cursor.getString(2);
+
+                Equipment equipment = new Equipment(itemName,itemDescription,typeName);
+                returnList.add(equipment);
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+
+    /**
+     * Initial call to create a list of Locations
+     * @return an instance of {@link List} that contains all {@link Location} objects found in the location table
+     *
+     * @throws IOException if the database copy from assets fails
+     */
+    public List<Location> getLocations() throws IOException {
+        List<Location> returnList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDB();
+        String query = "SELECT * " + "FROM " + LOCATION_TABLE;
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()){
+            //if there are results then we loop through to create a Location Object for each row
+            do{
+                String name = cursor.getString(1);
+                String description = cursor.getString(2);
+
+                Location location = new Location(name,description);
+                returnList.add(location);
+            }while(cursor.moveToNext());
+        }
+        else{
+            return returnList = null;
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+
+
 }
 
