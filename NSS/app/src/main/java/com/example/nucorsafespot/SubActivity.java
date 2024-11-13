@@ -43,6 +43,7 @@ public class SubActivity extends AppCompatActivity {
 
     private List<Equipment> fetchDataFromDatabase(String area) {
         // This is a placeholder. Implement database fetching logic here.
-        return DatabaseHelper.getEquipmentForArea(area);
+        return DBHelper.getEquipmentList(area);
     }
 }
+//not sure if we will need this class
