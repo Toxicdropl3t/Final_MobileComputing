@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import android.util.Log;
 
 
 /**
@@ -60,11 +61,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void initializeDB() throws IOException{
-        if(!checkDBExists()){
-            this.getReadableDB();
-            this.close();
+    private void initializeDB() throws IOException {
+        if (!checkDBExists()) {
+            Log.d("DBHelper", "Database does not exist. Copying from assets.");
+
+            // Create an empty database to set up the path
+            this.getReadableDatabase().close();
+
+            // Now copy the database from assets
             copyDBFromAssets();
+        } else {
+            Log.d("DBHelper", "Database already exists. No need to copy.");
         }
     }
 
@@ -72,6 +79,7 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME,null,DATABASE_VER);
         this.context = context;
         DATABASE_PATH = context.getDatabasePath(DATABASE_NAME).getPath();
+        Log.d("DBHelper", "Database path: " + DATABASE_PATH);
     }
 
     private boolean checkDBExists() {
@@ -83,17 +91,19 @@ public class DBHelper extends SQLiteOpenHelper {
      * Copies Database contents from the database file in assets
      * @throws IOException
      */
-    private void copyDBFromAssets() throws IOException{
+    private void copyDBFromAssets() {
         try (InputStream input = context.getAssets().open(DATABASE_NAME);
-             OutputStream output = new FileOutputStream(DATABASE_PATH)){
+             OutputStream output = new FileOutputStream(DATABASE_PATH)) {
 
             byte[] buffer = new byte[1024];
             int length;
-
-            while((length = input.read(buffer)) > 0){
+            while ((length = input.read(buffer)) > 0) {
                 output.write(buffer, 0, length);
             }
             output.flush();
+            Log.d("DBHelper", "Database copied successfully from assets to " + DATABASE_PATH);
+        } catch (IOException e) {
+            Log.e("DBHelper", "Error copying database from assets: " + e.getMessage());
         }
     }
 
@@ -105,16 +115,16 @@ public class DBHelper extends SQLiteOpenHelper {
      * @return an instance of {@link SQLiteDatabase} that can be read
      * @throws IOException if the database copy from assets fails
      */
-    public synchronized SQLiteDatabase getReadableDB() throws IOException{
+    public synchronized SQLiteDatabase getReadableDB() throws IOException {
         try {
             initializeDB();
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException("Error initializing database", e);
         }
         return super.getReadableDatabase();
     }
 
-    public List<Equipment> getEquipmentByLocation(String locationname) throws IOException{
+    public List<Equipment> getEquipmentByLocation(String locationName) throws IOException{
         List<Equipment> returnList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDB();
         String query = "SELECT e." + COLUMN_ITEM_NAME + ", e." + COLUMN_ITEM_DESCRIPTION + ", et." + COLUMN_EQUIPMENT_TYPE_NAME +
@@ -122,7 +132,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "JOIN " + EQLOCATION_TABLE + " el ON e." + COLUMN_ITEM_ID + " = el." + COLUMN_EQLOCATION_ID +
                 " JOIN " + LOCATION_TABLE + " l ON el." + COLUMN_EQLOCATION_LOCATION_ID + " = l." + COLUMN_LOCATION_ID +
                 " JOIN " + TYPE_TABLE + " et ON e." + COLUMN_ITEM_TYPE + " = et." + COLUMN_EQUIPMENT_TYPE_ID +
-                " WHERE l." + COLUMN_LOCATION_NAME + " = " + locationname;
+                " WHERE l." + COLUMN_LOCATION_NAME + " = '" + locationName + "'";
         Cursor cursor = db.rawQuery(query, null);
         if (cursor.moveToFirst()){
             //if there are results then we loop through to create a Equipment Object for each row
@@ -146,33 +156,31 @@ public class DBHelper extends SQLiteOpenHelper {
      * @return an instance of {@link List} that contains all {@link Location} objects found in the location table
      *
      * @throws IOException if the database copy from assets fails
+     *
+     * Adding logs because there are errors -Gage
      */
     public List<Location> getLocations() throws IOException {
         List<Location> returnList = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDB();
-        String query = "SELECT * " + "FROM " + LOCATION_TABLE;
-
-        Cursor cursor = db.rawQuery(query, null);
-
-        if(cursor.moveToFirst()){
-            //if there are results then we loop through to create a Location Object for each row
-            do{
-                String name = cursor.getString(1);
-                String description = cursor.getString(2);
-
-                Location location = new Location(name,description);
-                returnList.add(location);
-            }while(cursor.moveToNext());
+        SQLiteDatabase db = null;
+        try {
+            db = this.getReadableDB();
+            String query = "SELECT * FROM " + LOCATION_TABLE;
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    String name = cursor.getString(1);
+                    String description = cursor.getString(2);
+                    Location location = new Location(name, description);
+                    returnList.add(location);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        } catch (Exception e) {
+            Log.e("DBHelper", "Error accessing locations: " + e.getMessage());
+        } finally {
+            if (db != null) db.close();
         }
-        else{
-            return returnList = null;
-        }
-        cursor.close();
-        db.close();
         return returnList;
     }
-
-
-
 }
 

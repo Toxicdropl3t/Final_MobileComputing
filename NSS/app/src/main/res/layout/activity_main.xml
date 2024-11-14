@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/your_background_image">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/titleText"
@@ -13,23 +12,29 @@
         android:layout_gravity="center_horizontal"
         android:background="#0C640C"
         android:padding="16dp"
-        android:text="Nucor Safe Spot Acrros the top"
+        android:text="Nucor Safe Spot Across the Top"
         android:textColor="#FFFFFF"
         android:textSize="24sp" />
 
-    <!-- Buttons for each area -->
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/descriptionText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="A description explaining what NSS is?" />
+        android:text="A description explaining what NSS is?"
+        android:padding="8dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/instructionsText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Maybe a Scrollable textview with clickable items inside for each area people can click on??" />
+        android:text="Tap on any location to see more details."
+        android:padding="8dp" />
 
-    <!-- Add more buttons as needed -->
-
+    <ListView
+        android:id="@+id/locationListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:dividerHeight="1dp"
+        android:padding="8dp" />
 </LinearLayout>

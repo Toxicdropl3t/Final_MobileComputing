@@ -1,15 +1,17 @@
 package com.example.nucorsafespot;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import java.io.IOException;
 import java.util.List;
 
 public class SubActivity extends AppCompatActivity {
     private String areaName;
+    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,34 +23,36 @@ public class SubActivity extends AppCompatActivity {
         title.setText(areaName);
 
         LinearLayout equipmentContainer = findViewById(R.id.equipmentContainer);
+        dbHelper = new DBHelper(this);
 
-        // Assume fetchDataFromDatabase is a method that returns a list of equipment names for the given area
-        List<Equipment> equipmentList = fetchDataFromDatabase(areaName);
+        try {
+            // Fetch equipment for the selected area
+            List<Equipment> equipmentList = dbHelper.getEquipmentByLocation(areaName);
 
-        for (Equipment equipment : equipmentList) {
-            Button equipmentButton = new Button(this);
-            equipmentButton.setText(equipment.getName());
-            equipmentButton.setOnClickListener(v -> showDescriptionPopup(equipment.getDescription()));
-            equipmentContainer.addView(equipmentButton);
+            // Dynamically add buttons for each equipment
+            for (Equipment equipment : equipmentList) {
+                Button equipmentButton = new Button(this);
+                equipmentButton.setText(equipment.getName());
+
+                // Set a click listener to show the description in a popup
+                equipmentButton.setOnClickListener(v -> showDescriptionPopup(equipment.getName(), equipment.getDescription(), equipment.getType()));
+
+                equipmentContainer.addView(equipmentButton);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        // Back button
+        Button backToMainMenuButton = findViewById(R.id.backToMainMenuButton);
+        backToMainMenuButton.setOnClickListener(v -> finish());
     }
 
-    private void showDescriptionPopup(String description) {
+    // Popup functionality to show more info for each piece of equipment
+    private void showDescriptionPopup(String name, String description, String type) {
         new AlertDialog.Builder(this)
-                .setTitle("Description")
+                .setTitle(name + " (" + type + ")")
                 .setMessage(description)
                 .setPositiveButton("OK", null)
                 .show();
     }
-
-    /**
-     * @deprecated
-     * @param area
-     * @return
-     */
-    private List<Equipment> fetchDataFromDatabase(String area) {
-        // This is a placeholder. Implement database fetching logic here.
-        return DBHelper.getEquipmentList(area);
-    }
 }
-//not sure if we will need this class
