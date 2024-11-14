@@ -103,14 +103,9 @@ public class DBHelper extends SQLiteOpenHelper {
      * Retrieves a readable database instance, initializing the database if necessary.
      *
      * @return an instance of {@link SQLiteDatabase} that can be read
-     * @throws IOException if the database copy from assets fails
+     *
      */
-    public synchronized SQLiteDatabase getReadableDB() throws IOException{
-        try {
-            initializeDB();
-        } catch (IOException e){
-            throw new RuntimeException("Error initializing database", e);
-        }
+    public synchronized SQLiteDatabase getReadableDB(){
         return super.getReadableDatabase();
     }
 

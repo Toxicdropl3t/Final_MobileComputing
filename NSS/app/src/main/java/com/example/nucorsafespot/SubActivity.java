@@ -23,32 +23,25 @@ public class SubActivity extends AppCompatActivity {
         LinearLayout equipmentContainer = findViewById(R.id.equipmentContainer);
 
         // Assume fetchDataFromDatabase is a method that returns a list of equipment names for the given area
-        List<Equipment> equipmentList = fetchDataFromDatabase(areaName);
+        //List<Equipment> equipmentList = fetchDataFromDatabase(areaName);
 
-        for (Equipment equipment : equipmentList) {
+     /**   for (Equipment equipment : equipmentList) {
             Button equipmentButton = new Button(this);
             equipmentButton.setText(equipment.getName());
             equipmentButton.setOnClickListener(v -> showDescriptionPopup(equipment.getDescription()));
             equipmentContainer.addView(equipmentButton);
         }
+      **/
     }
 
-    private void showDescriptionPopup(String description) {
+
+  /**  private void showDescriptionPopup(String description) {
         new AlertDialog.Builder(this)
                 .setTitle("Description")
                 .setMessage(description)
                 .setPositiveButton("OK", null)
                 .show();
     }
+   **/
 
-    /**
-     * @deprecated
-     * @param area
-     * @return
-     */
-    private List<Equipment> fetchDataFromDatabase(String area) {
-        // This is a placeholder. Implement database fetching logic here.
-        return DBHelper.getEquipmentList(area);
-    }
 }
-//not sure if we will need this class

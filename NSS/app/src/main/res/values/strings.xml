@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NucorSafeSpot</string>
+    <string name="nssdescription">What is NucorSafeSpot? NucorSafeSpot is a PPE(personal protective equipment) index that employees and visitors can utilize to facilitate a safe work environment. This application allows you, the user, to select a location and provides you with a list of required PPE to safely traverse that location. </string>
 </resources>

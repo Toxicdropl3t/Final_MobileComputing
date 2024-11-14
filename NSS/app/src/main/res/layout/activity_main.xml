@@ -1,34 +1,64 @@
 <!-- res/layout/activity_main.xml -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/your_background_image">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="#0C640C"
-        android:padding="16dp"
-        android:text="Nucor Safe Spot Acrros the top"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp" />
+        android:gravity="center"
+        >
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/DarkGreen"
+            android:padding="16dp"
+            android:text="Nucor Safe Spot"
+            android:textColor="@color/PaleGreen"
+            android:textSize="24sp"
+            android:gravity="center"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/nssdescriptionbutton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:backgroundTint="@color/PaleGreen"
+            android:text="\?"
+            android:textColor="@color/DarkGreen"
+            android:textSize="11sp"
+            app:cornerRadius="25dp"
+            app:rippleColor="@color/DarkGreen"
+            android:padding="0dp"
+            android:gravity="center"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent">
+
+        <LinearLayout
+            android:id="@+id/locationscrollview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@android:color/transparent"
+            >
+        </LinearLayout>
+    </ScrollView>
+
 
     <!-- Buttons for each area -->
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="A description explaining what NSS is?" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Maybe a Scrollable textview with clickable items inside for each area people can click on??" />
+
+
 
     <!-- Add more buttons as needed -->
 

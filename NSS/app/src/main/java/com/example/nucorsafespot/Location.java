@@ -1,5 +1,7 @@
 package com.example.nucorsafespot;
 
+import androidx.annotation.NonNull;
+
 public class Location {
     private String location_name,location_description;
 
@@ -14,5 +16,14 @@ public class Location {
 
     public String getLocation_description() {
         return location_description;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Location{" +
+                "location_name='" + location_name + '\'' +
+                ", location_description='" + location_description + '\'' +
+                '}';
     }
 }
