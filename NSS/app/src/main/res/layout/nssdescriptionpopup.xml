@@ -34,8 +34,7 @@
         android:text="@string/nssdescription"
         android:textColor="@color/PaleGreen"
         android:autoSizeTextType="uniform"
-        android:gravity="center"
-        android:lines="30">
+        android:gravity="center">
     </TextView>
 
 

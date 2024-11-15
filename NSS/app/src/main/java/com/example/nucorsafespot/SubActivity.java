@@ -20,7 +20,7 @@ public class SubActivity extends AppCompatActivity {
 
         areaName = getIntent().getStringExtra("AREA_NAME");
         TextView title = findViewById(R.id.areaTitle);
-        title.setText(areaName);
+        title.setText(areaName.toUpperCase());
 
         LinearLayout equipmentContainer = findViewById(R.id.equipmentContainer);
         dbHelper = new DBHelper(this);
@@ -31,12 +31,9 @@ public class SubActivity extends AppCompatActivity {
 
             // Dynamically add buttons for each equipment
             for (Equipment equipment : equipmentList) {
-                Button equipmentButton = new Button(this);
-                equipmentButton.setText(equipment.getName());
-
+                Button equipmentButton = styleEquipmentButton(new Button(this), equipment );
                 // Set a click listener to show the description in a popup
                 equipmentButton.setOnClickListener(v -> showDescriptionPopup(equipment.getName(), equipment.getDescription(), equipment.getType()));
-
                 equipmentContainer.addView(equipmentButton);
             }
         } catch (IOException e) {
@@ -45,6 +42,7 @@ public class SubActivity extends AppCompatActivity {
         // Back button
         Button backToMainMenuButton = findViewById(R.id.backToMainMenuButton);
         backToMainMenuButton.setOnClickListener(v -> finish());
+
     }
 
     // Popup functionality to show more info for each piece of equipment
@@ -54,5 +52,18 @@ public class SubActivity extends AppCompatActivity {
                 .setMessage(description)
                 .setPositiveButton("OK", null)
                 .show();
+    }
+
+    /**
+     * Applies styling to the button object
+     * @param button
+     * @param equipment
+     * @return styled button
+     */
+    private Button styleEquipmentButton(Button button, Equipment equipment){
+        button.setText(equipment.getName());
+        button.setBackgroundColor(getColor(R.color.DarkGreen));
+        button.setTextColor(getColor(R.color.LightGreen));
+        return button;
     }
 }

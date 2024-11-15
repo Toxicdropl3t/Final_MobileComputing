@@ -1,15 +1,11 @@
 <!-- res/layout/activity_sub.xml -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dynamic page that displays whatever information that is requested by the user by clicking on the corresponding button in the main page. Only part of this page should change dynamically, so half the page could already be setup maybe with a title at the top and such.." />
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/LightGreen"
+    >
 
     <TextView
         android:id="@+id/areaTitle"
@@ -36,7 +32,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Back to Main Menu"
+        android:textColor="@color/PaleGreen"
+        android:backgroundTint="@color/DarkGreen"
         android:padding="16dp"
+        android:layout_margin="20dp"
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

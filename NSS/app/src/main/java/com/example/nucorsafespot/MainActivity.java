@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        /**
         //iterate through locationsList then print locations if list != null (debugging)
         if (locationList != null){
             for (Location location: locationList
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         }else {
             System.out.println("Location List empty");
         }
+         **/
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
