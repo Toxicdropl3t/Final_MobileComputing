@@ -21,7 +21,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:id="@+id/equipmentContainer"
@@ -30,5 +31,12 @@
             android:orientation="vertical" />
 
     </ScrollView>
+    <Button
+        android:id="@+id/backToMainMenuButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Main Menu"
+        android:padding="16dp"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

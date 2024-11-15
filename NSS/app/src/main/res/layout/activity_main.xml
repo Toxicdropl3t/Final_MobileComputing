@@ -36,23 +36,15 @@
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
-    <ScrollView
+    <ListView
+        android:id="@+id/locationListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_gravity="center"
+        android:layout_weight="1"
         android:background="@android:color/transparent">
-
-        <LinearLayout
-            android:id="@+id/locationscrollview"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:background="@android:color/transparent"
-            >
-        </LinearLayout>
-    </ScrollView>
+    </ListView>
 
 
     <!-- Buttons for each area -->
