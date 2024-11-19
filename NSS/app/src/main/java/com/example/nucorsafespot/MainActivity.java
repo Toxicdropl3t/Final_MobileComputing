@@ -25,7 +25,8 @@ import java.util.List;
  * {@author Gage}
  */
 
-public class MainActivity extends AppCompatActivity {
+public class
+MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,11 +71,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
         ListView locationListView = findViewById(R.id.locationListView);
         dbHelper = new DBHelper(this);
 
@@ -82,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
         try {
             List<Location> locations = dbHelper.getLocations();
             if (locations != null && !locations.isEmpty()) {
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                         this,
-                        android.R.layout.simple_list_item_1,
-                        getLocationNames(locations) // List of location names to display
+                        R.layout.list_item, // Use the custom xml layout (list_item.xml)
+                        getLocationNames(locations)
                 );
                 locationListView.setAdapter(adapter);
 

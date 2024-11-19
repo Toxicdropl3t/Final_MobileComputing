@@ -1,57 +1,49 @@
-<!-- res/layout/activity_main.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:background="@drawable/ladle_move">
 
-    <RelativeLayout
+    <!-- Title TextView -->
+    <TextView
+        android:id="@+id/titleText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Nucor Safe Spot"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
         android:gravity="center"
-        >
-        <TextView
-            android:id="@+id/titleText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/DarkGreen"
-            android:padding="16dp"
-            android:text="Nucor Safe Spot"
-            android:textColor="@color/PaleGreen"
-            android:textSize="24sp"
-            android:gravity="center"/>
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/nssdescriptionbutton"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:backgroundTint="@color/PaleGreen"
-            android:text="\?"
-            android:textColor="@color/DarkGreen"
-            android:textSize="11sp"
-            app:cornerRadius="25dp"
-            app:rippleColor="@color/DarkGreen"
-            android:padding="0dp"
-            android:gravity="center"
-            android:layout_alignParentRight="true"/>
-    </RelativeLayout>
+        android:background="@android:color/transparent" />
 
+    <!-- Description Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/nssdescriptionbutton"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:backgroundTint="@android:color/transparent"
+        android:text="\?"
+        android:textColor="@android:color/white"
+        android:textSize="11sp"
+        app:cornerRadius="25dp"
+        app:rippleColor="@android:color/white"
+        android:padding="0dp"
+        android:gravity="center"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp" />
+
+    <!-- ListView -->
     <ListView
         android:id="@+id/locationListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="20dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:background="@android:color/transparent">
-    </ListView>
-
-
-    <!-- Buttons for each area -->
-
-
-
-
-    <!-- Add more buttons as needed -->
-
-</LinearLayout>
+        android:background="@android:color/transparent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp"
+        android:paddingTop="80dp"
+        android:paddingBottom="20dp" />
+    </RelativeLayout>
