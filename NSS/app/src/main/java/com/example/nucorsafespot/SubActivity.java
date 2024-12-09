@@ -32,6 +32,7 @@ public class SubActivity extends AppCompatActivity {
 
         LinearLayout equipmentContainer = findViewById(R.id.equipmentContainer);
         dbHelper = new DBHelper(this);
+        Button backToMainMenuButton = findViewById(R.id.backToMainMenuButton);
 
         try {
             // Fetch equipment for the selected area
@@ -59,11 +60,11 @@ public class SubActivity extends AppCompatActivity {
                         ((LinearLayout) dropdownView).addView(equipmentButton);
                     }
                     int[] location = new int[2];
-                    view.getLocationOnScreen(location);
+                    equipmentContainer.getLocationOnScreen(location);
                     int xPos = location[0];
-                    int yPos = location[1] + view.getHeight();
+                    int yPos = location[1] + 150;
 
-                    dropdownWindow.showAtLocation(view, Gravity.NO_GRAVITY, xPos,yPos);
+                    dropdownWindow.showAtLocation(view, Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM, xPos,yPos);
 
                 });
             }
@@ -79,7 +80,6 @@ public class SubActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         // Back button
-        Button backToMainMenuButton = findViewById(R.id.backToMainMenuButton);
         backToMainMenuButton.setOnClickListener(v -> finish());
 
     }
