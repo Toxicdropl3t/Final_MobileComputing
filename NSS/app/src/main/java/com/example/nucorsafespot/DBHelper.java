@@ -180,8 +180,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 do {
                     String name = cursor.getString(1);
                     String description = cursor.getString(2);
-                    Location location = new Location(name, description);
-                    returnList.add(location);
+                    if (!"general".equalsIgnoreCase(name)) {
+                        Location location = new Location(name, description);
+                        returnList.add(location);
+                    }
                 } while (cursor.moveToNext());
             }
             cursor.close();
