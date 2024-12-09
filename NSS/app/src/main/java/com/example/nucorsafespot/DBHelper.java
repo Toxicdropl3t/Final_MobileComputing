@@ -9,7 +9,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import android.media.audiofx.DynamicsProcessing;
 import android.util.Log;
 
 
@@ -144,6 +147,19 @@ public class DBHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
+    public HashMap<String, List<Equipment>> SortEquipmentByType(List<Equipment> equipmentList){
+        HashMap<String, List<Equipment>> equipmentByType = new HashMap<>();
+        for (Equipment item : equipmentList){
+           String itemtype = item.getType().toString();
+            if(!equipmentByType.containsKey(itemtype)){
+                List<Equipment> newList = new ArrayList<>();
+                equipmentByType.put(itemtype,newList);
+            }
+            List<Equipment> list = equipmentByType.get(itemtype);
+            list.add(item);
+        }
+        return equipmentByType;
+    }
 
     /**
      * Initial call to create a list of Locations
